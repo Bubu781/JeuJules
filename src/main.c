@@ -1,4 +1,4 @@
-#include "labyrinthe.h"
+#include "lab.h"
 #include "jeu.h"
 
 int main(int argc, char const *argv[])
