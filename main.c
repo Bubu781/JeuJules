@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#ifdef MINGW32
+#include <conio.h>
+#endif
 #define TAILLE_1 20
 #define CENTER 10
 void create_lab(unsigned short labyrinthe[TAILLE_1][TAILLE_1]);
@@ -81,7 +84,11 @@ unsigned short check_around(unsigned short labyrinthe[TAILLE_1][TAILLE_1], unsig
 
 void print_tab(unsigned short labyrinthe[TAILLE_1][TAILLE_1])
 {
+#ifdef MINGW32
+    system("cls");
+#else
     system("clear");
+#endif
     printf("______________________\n");
     for(unsigned short i = 0; i < TAILLE_1; i++){
         printf("|");
@@ -117,7 +124,11 @@ void game(unsigned short labyrinthe[TAILLE_1][TAILLE_1])
                 else labyrinthe[x][y+1] = 3;
             }
             print_tab(labyrinthe);
+#ifdef MINGW32
+            ch = getch();
+#else
             ch = getchar();
+#endif
             labyrinthe[x][y] = 0;
             if(ch == 'z' && labyrinthe[x-1][y] == 4) x--;
             else if(ch == 's' && labyrinthe[x+1][y] == 4) x++;
