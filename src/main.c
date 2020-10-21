@@ -1,12 +1,13 @@
 #include "lab.h"
 #include "jeu.h"
+#include "socket.h"
 
 int main(int argc, char const *argv[])
 {
-    unsigned short labyrinthe[TAILLE_1][TAILLE_1];
     srand(time(NULL));
-
-    create_lab(labyrinthe);
-    game(labyrinthe);
+    sock_client = init_connection();
+    pthread_t thread;
+    pthread_create(&thread,NULL, read_message, NULL);
+    game();
     return 0;
 }

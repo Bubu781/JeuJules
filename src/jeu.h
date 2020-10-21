@@ -1,2 +1,3 @@
 #include "info.h"
-void game(unsigned short labyrinthe[TAILLE_1][TAILLE_1]);
+#include "lab.h"
+void game();
