@@ -9,7 +9,7 @@ const taille = 20;
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-sendLab = () =>{
+sendLab = async () =>{
     let labyrinthe = createTab();
         for(let i = 0; i < taille; i++){
             let txt = "I";
