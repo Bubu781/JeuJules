@@ -43,7 +43,6 @@ int init_connection(void){
 DWORD WINAPI read_message()
 {
     int end = 0;
-    printf("hey");
     while(end == 0)
     {
         char server_reply[1000] = {0};
@@ -55,7 +54,6 @@ DWORD WINAPI read_message()
         int checksum = 0;
         if(recv(sock_client, server_reply,100,0) < 0) puts("erreur\n");
         else if(server_reply[0] != 0){
-            printf("%s", server_reply); 
             if(server_reply[0] == INIT_LABYRINTHE){
                 k = 1;
                 for(int j = 0; j < TAILLE_1; j++){
@@ -71,8 +69,6 @@ DWORD WINAPI read_message()
                     other1->pseudo = 'A';
             }else if(server_reply[0] == NEW_POS){
                 if(server_reply[1] == selfPlayer->pseudo){
-                    printf("%d", server_reply[2]);
-                    printf("%d", server_reply[3]);
                     selfPlayer->x = server_reply[2];
                     selfPlayer->y = server_reply[3];
                     labyrinthe[selfPlayer->x][selfPlayer->y]=2;
@@ -109,7 +105,6 @@ void sendMessage(const char *ecrit, int nbOctet) {
 void game()
 {
     while(selfPlayer->x == -1)sleep(1);
-    printf("enter0");
     unsigned short x = selfPlayer->x, y = selfPlayer->y;
     int ch;
     while(x != 0 && x != TAILLE_1 - 1 &&
