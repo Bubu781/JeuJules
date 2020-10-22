@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
-#define TAILLE_1 9
-#define CENTER 5
+#define TAILLE_1 20
+#define CENTER 10
 struct myPlayer{
     int x;
     int y;

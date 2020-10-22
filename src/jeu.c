@@ -1,5 +1,5 @@
 #include "jeu.h"
-
+int ligne = 0;
 int init_connection(void){
 
     SOCKADDR_IN server;
@@ -57,12 +57,11 @@ DWORD WINAPI read_message()
             printf("%s", server_reply); 
             if(server_reply[0] == INIT_LABYRINTHE){
                 int k = 1;
-                for(int i = 0; i < TAILLE_1; i++){
                     for(int j = 0; j < TAILLE_1; j++){
-                        labyrinthe[i][j] = '0' - server_reply[k];
+                        labyrinthe[ligne][j] = '0' - server_reply[k];
                         k++;
                     }
-                }
+                ligne++;
             }else if(server_reply[0] == PSEUDO){
                 selfPlayer->pseudo = server_reply[1];
                 if(selfPlayer->pseudo == 'A')
@@ -70,17 +69,14 @@ DWORD WINAPI read_message()
                 else
                     other1->pseudo = 'A';
             }else if(server_reply[0] == NEW_POS){
-                printf("ici");
                 if(server_reply[1] == selfPlayer->pseudo){
-                    
-                    printf("LA");
                     printf("%d", server_reply[2]);
                     printf("%d", server_reply[3]);
                     selfPlayer->x = server_reply[2];
                     selfPlayer->y = server_reply[3];
                 }else if(server_reply[1] == other1->pseudo){
-                    other1->x = 0 - server_reply[2];
-                    other1->y = 0 - server_reply[3];
+                    other1->x = server_reply[2];
+                    other1->y = server_reply[3];
                     labyrinthe[other1->x][other1->y] = 6;
                 }
                 print_lab();
