@@ -6,6 +6,23 @@ const app = express();
 
 const center = 10;
 const taille = 20;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+sendLab = () =>{
+    let labyrinthe = createTab();
+        for(let i = 0; i < taille; i++){
+            let txt = "I";
+            for(let j = 0; j < taille; j++)
+                txt = txt.concat(labyrinthe[i][j]);
+            clients.forEach(client =>{
+                client.write(txt);
+                console.log(txt);
+                console.log("send map", client.pseudo);
+            });
+            await sleep(500);
+        }
+}
 check_around = (labyrinthe, x, y)=>{
     let sum = 0, pos1, pos2, pos3, pos4;
     if(x-1 < 0) pos1 = 1;
@@ -74,7 +91,7 @@ createTab = () =>{
 }
 let letter = "A";
 let clients = [];
-net.createServer(function(socket){
+net.createServer(async socket =>{
     socket.write("P"+letter);
     socket.pseudo = letter;
     console.log("connected", socket.pseudo);
@@ -82,17 +99,7 @@ net.createServer(function(socket){
     if(letter == "A")
         letter = "B";
     else{
-        let labyrinthe = createTab();
-        for(let i = 0; i < taille; i++){
-            let txt = "I";
-            for(let j = 0; j < taille; j++)
-                txt = txt.concat(labyrinthe[i][j]);
-            clients.forEach(client =>{
-                client.write(txt);
-                console.log(txt);
-                console.log("send map", client.pseudo);
-            });
-        }
+        await sendLab();
         let x1 = Math.floor(Math.random()*4) - 2 + center;
         let y1 = Math.floor(Math.random()*4) - 2 + center;
         let x2 = Math.floor(Math.random()*4) - 2 + center;

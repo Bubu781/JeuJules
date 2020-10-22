@@ -48,7 +48,8 @@ DWORD WINAPI read_message()
     {
         char server_reply[1000] = {0};
         int i=0;
-        int j=0;    
+        int j=0; 
+        int k;   
         int typemsg = 0;
         char taille;
         int checksum = 0;
@@ -56,11 +57,11 @@ DWORD WINAPI read_message()
         else if(server_reply[0] != 0){
             printf("%s", server_reply); 
             if(server_reply[0] == INIT_LABYRINTHE){
-                int k = 1;
-                    for(int j = 0; j < TAILLE_1; j++){
-                        labyrinthe[ligne][j] = '0' - server_reply[k];
-                        k++;
-                    }
+                k = 1;
+                for(int j = 0; j < TAILLE_1; j++){
+                    labyrinthe[ligne][j] = '0' - server_reply[k];
+                    k++;
+                }
                 ligne++;
             }else if(server_reply[0] == PSEUDO){
                 selfPlayer->pseudo = server_reply[1];
