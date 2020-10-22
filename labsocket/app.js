@@ -109,12 +109,14 @@ net.createServer(function(socket){
     }
     socket.on("data",(data)=>{
         let str = "";
+        console.log(data)
         for(let i = 0; i < 5; i++){
             str = str.concat(String.fromCharCode(data[i]));
         }
+        console.log(str)
         clients.forEach(client=>{
             if(client.pseudo != socket.pseudo){
-                client.write("N"+socket.pseudo+i+j);
+                client.write("N"+socket.pseudo+String.fromCharCode(data[1])+String.fromCharCode(data[2]));
                 console.log("send pos", socket.pseudo);
             }
         })

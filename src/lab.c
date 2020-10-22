@@ -12,7 +12,7 @@ void print_lab()
         printf("|");
         for(unsigned short j = 0; j < TAILLE_1; j++)
             if(/*labyrinthe[i][j] == 1 || */labyrinthe[i][j] == 3)printf("%c", 219);
-            else if(/*labyrinthe[i][j] == 0 || labyrinthe[i][j] == 4*/ labyrinthe[i][j] != 2 || labyrinthe[i][j] != 5) printf(" ");
+            else if(/*labyrinthe[i][j] == 0 || labyrinthe[i][j] == 4*/ labyrinthe[i][j] != 2 && labyrinthe[i][j] != 5) printf(" ");
             else if(labyrinthe[i][j] == 2) printf("A");
             else if(labyrinthe[i][j] == 5) printf("B");
         printf("|\n");

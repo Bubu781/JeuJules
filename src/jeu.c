@@ -83,6 +83,7 @@ DWORD WINAPI read_message()
                     other1->y = 0 - server_reply[3];
                     labyrinthe[other1->x][other1->y] = 6;
                 }
+                print_lab();
             }else if(server_reply[0] == WIN){
                 selfPlayer->x = 0;
                 selfPlayer->y = 0;
@@ -132,7 +133,6 @@ void game()
                 else if(labyrinthe[x][y+1] == 6) labyrinthe[x-1][y] = 5;
                 else labyrinthe[x][y+1] = 3;
             }
-            print_lab();
 #ifdef MINGW32
             ch = getch();
 #else
@@ -150,6 +150,7 @@ void game()
             message[0] = NEW_POS;
             message[1] = x;
             message[2] = y;
+            print_lab();
             sendMessage(message, 3);
     }
 }
