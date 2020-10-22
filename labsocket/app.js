@@ -124,7 +124,7 @@ net.createServer(async socket =>{
             str = str.concat(String.fromCharCode(data[i]));
         }
         if(data[1] == 0 || data[1] == taille-1 || data[2] == 0 || data[2] == taille-1) 
-        clients.forEach(client=>client.write("W"));
+        clients.forEach(client=>{if(socket.pseudo != client.pseudo) client.write("W")});
         console.log(str)
         clients.forEach(client=>{
             if(client.pseudo != socket.pseudo){
@@ -132,6 +132,9 @@ net.createServer(async socket =>{
                 console.log("send pos", socket.pseudo);
             }
         })
+        socket.on('end', function () {
+            clients.splice(clients.indexOf(socket), 1);
+          });
     });
 }).listen(3000);
 

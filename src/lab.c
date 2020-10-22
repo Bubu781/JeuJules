@@ -7,15 +7,13 @@ void gotoligcol( int lig, int col ){
 }
 void print_lab()
 {
-    gotoligcol(0,0);
-    printf("                      \n");
     for(unsigned short i = 0; i < TAILLE_1; i++){
+        gotoligcol(i+1,1);
         printf(" ");
         for(unsigned short j = 0; j < TAILLE_1; j++)
             printf(" ");
         printf(" \n");
     }
-    printf("                      \n");
 
     gotoligcol(0,0);
     printf("______________________\n");

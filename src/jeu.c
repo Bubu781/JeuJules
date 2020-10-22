@@ -80,6 +80,11 @@ DWORD WINAPI read_message()
                     if(other1->x-selfPlayer->x>=-1 && other1->x-selfPlayer->x<=1 && other1->y-selfPlayer->y>=-1 && other1->y-selfPlayer->y<=1)
                     labyrinthe[other1->x][other1->y] = 5;
                 }
+#ifdef MINGW32
+                system("cls");
+#else
+                system("clear");
+#endif
                 print_lab();
             }else if(server_reply[0] == WIN){
                 selfPlayer->x = 0;
