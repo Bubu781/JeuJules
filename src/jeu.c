@@ -78,7 +78,9 @@ DWORD WINAPI read_message()
                     other1->x = server_reply[2];
                     other1->y = server_reply[3];
                     if(other1->x-selfPlayer->x>=-1 && other1->x-selfPlayer->x<=1 && other1->y-selfPlayer->y>=-1 && other1->y-selfPlayer->y<=1)
-                    labyrinthe[other1->x][other1->y] = 5;
+                        labyrinthe[other1->x][other1->y] = 5;
+                    else
+                        labyrinthe[other1->x][other1->y] = 6;
                 }
 #ifdef MINGW32
                 system("cls");
@@ -116,18 +118,22 @@ void game()
         y != 0 && y != TAILLE_1 - 1){
             if(x-1 >= 0){
                 if(labyrinthe[x-1][y] == 0 || labyrinthe[x-1][y] == 4) labyrinthe[x-1][y] = 4;
+                else if(labyrinthe[x-1][y] == 6) labyrinthe[x-1][y] = 5;
                 else if(labyrinthe[x-1][y] != 5) labyrinthe[x-1][y] = 3;
             }
             if(x+1 < TAILLE_1){
                 if(labyrinthe[x+1][y] == 0 || labyrinthe[x+1][y] == 4) labyrinthe[x+1][y] = 4;
+                else if(labyrinthe[x+1][y] == 6) labyrinthe[x+1][y] = 5;
                 else if(labyrinthe[x+1][y] != 5) labyrinthe[x+1][y] = 3;
             }
             if(y-1 >= 0){
                 if(labyrinthe[x][y-1] == 0 || labyrinthe[x][y-1] == 4) labyrinthe[x][y-1] = 4;
+                else if(labyrinthe[x][y-1] == 6) labyrinthe[x][y-1] = 5;
                 else if(labyrinthe[x][y-1] != 5) labyrinthe[x][y-1] = 3;
             }
             if(y+1 < TAILLE_1){
                 if(labyrinthe[x][y+1] == 0 || labyrinthe[x][y+1] == 4) labyrinthe[x][y+1] = 4;
+                else if(labyrinthe[x][y+1] == 6) labyrinthe[x][y+1] = 5;
                 else if(labyrinthe[x][y+1] != 5) labyrinthe[x][y+1] = 3;
             }
 #ifdef MINGW32
