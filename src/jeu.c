@@ -116,6 +116,30 @@ void game()
     int ch;
     while(x != 0 && x != TAILLE_1 - 1 &&
         y != 0 && y != TAILLE_1 - 1){
+            if(labyrinthe[x-1][y] == 5) labyrinthe[x-1][y] = 6;
+
+            if(labyrinthe[x+1][y] == 5) labyrinthe[x+1][y] = 6;
+
+            if(labyrinthe[x][y-1] == 5) labyrinthe[x][y-1] = 6;
+
+            if(labyrinthe[x][y+1] == 5) labyrinthe[x][y+1] = 6;
+#ifdef MINGW32
+            ch = getch();
+#else
+            ch = getchar();
+#endif
+            labyrinthe[x][y] = 0;
+            if(ch == 'z' && labyrinthe[x-1][y] == 4) x--;
+            else if(ch == 's' && labyrinthe[x+1][y] == 4) x++;
+            else if(ch == 'q' && labyrinthe[x][y-1] == 4) y--;
+            else if(ch == 'd' && labyrinthe[x][y+1] == 4) y++;
+            selfPlayer->x = x;
+            selfPlayer->y = y;
+            labyrinthe[x][y] = 2;
+            char message[3];
+            message[0] = NEW_POS;
+            message[1] = x;
+            message[2] = y;
             if(x-1 >= 0){
                 if(labyrinthe[x-1][y] == 0 || labyrinthe[x-1][y] == 4) labyrinthe[x-1][y] = 4;
                 else if(labyrinthe[x-1][y] == 6) labyrinthe[x-1][y] = 5;
@@ -136,23 +160,6 @@ void game()
                 else if(labyrinthe[x][y+1] == 6) labyrinthe[x][y+1] = 5;
                 else if(labyrinthe[x][y+1] != 5) labyrinthe[x][y+1] = 3;
             }
-#ifdef MINGW32
-            ch = getch();
-#else
-            ch = getchar();
-#endif
-            labyrinthe[x][y] = 0;
-            if(ch == 'z' && labyrinthe[x-1][y] == 4) x--;
-            else if(ch == 's' && labyrinthe[x+1][y] == 4) x++;
-            else if(ch == 'q' && labyrinthe[x][y-1] == 4) y--;
-            else if(ch == 'd' && labyrinthe[x][y+1] == 4) y++;
-            selfPlayer->x = x;
-            selfPlayer->y = y;
-            labyrinthe[x][y] = 2;
-            char message[3];
-            message[0] = NEW_POS;
-            message[1] = x;
-            message[2] = y;
             print_lab();
             sendMessage(message, 3);
             
