@@ -129,10 +129,10 @@ void game()
             ch = getchar();
 #endif
             labyrinthe[x][y] = 0;
-            if(ch == 'z' && labyrinthe[x-1][y] == 4) x--;
-            else if(ch == 's' && labyrinthe[x+1][y] == 4) x++;
-            else if(ch == 'q' && labyrinthe[x][y-1] == 4) y--;
-            else if(ch == 'd' && labyrinthe[x][y+1] == 4) y++;
+            if(ch == 'z' && labyrinthe[x-1][y] == 4 || labyrinthe[x-1][y] == 6 || labyrinthe[x-1][y] == 5) x--;
+            else if(ch == 's' && labyrinthe[x+1][y] == 4 || labyrinthe[x+1][y] == 6 || labyrinthe[x+1][y] == 5) x++;
+            else if(ch == 'q' && labyrinthe[x][y-1] == 4 || labyrinthe[x][y-1] == 6 || labyrinthe[x][y-1] == 5) y--;
+            else if(ch == 'd' && labyrinthe[x][y+1] == 4 || labyrinthe[x][y+1] == 6 || labyrinthe[x][y+1] == 5) y++;
             selfPlayer->x = x;
             selfPlayer->y = y;
             labyrinthe[x][y] = 2;
